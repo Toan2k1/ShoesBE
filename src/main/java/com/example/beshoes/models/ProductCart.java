@@ -21,7 +21,7 @@ public class ProductCart implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long quantity;
+    private int quantity;
 
     private long totalprice;
 

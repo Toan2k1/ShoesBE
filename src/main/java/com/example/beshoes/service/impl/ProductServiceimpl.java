@@ -64,14 +64,14 @@ public class ProductServiceimpl implements ProductService {
     }
 
     @Override
-    public Product update(EditProductRequest request, MultipartFile image) throws IOException {
+    public Product update(EditProductRequest request/*, MultipartFile image*/) throws IOException {
 
-        String fileName = image.getOriginalFilename();
+        /*String fileName = image.getOriginalFilename();
         try {
             FileCopyUtils.copy(image.getBytes(), new File(CURRENT_FOLDER + fileName));
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         return productRepository.findById(request.getId())
                 .map(product -> {
@@ -82,13 +82,13 @@ public class ProductServiceimpl implements ProductService {
                     product.setDescription(request.getDescription());
                     product.setColor(request.getColor());
                     product.setSize(request.getSize());
-                    File filem = new File(CURRENT_FOLDER + product.getImage());
+                    /*File filem = new File(CURRENT_FOLDER + product.getImage());
                     if (filem.isFile()) {
                         filem.delete();
                     } else {
                         System.out.println("đ phải file");
                     }
-                    product.setImage(fileName);
+                    product.setImage(fileName);*/
                     return productRepository.save(product);
                 }).orElse(null);
     }

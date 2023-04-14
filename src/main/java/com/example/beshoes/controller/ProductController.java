@@ -50,8 +50,8 @@ public class ProductController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<AddProductResponse> editProduct(@ModelAttribute EditProductRequest request, @RequestPart("file") MultipartFile file) throws IOException {
-        var product = productService.update(request,file);
+    public ResponseEntity<AddProductResponse> editProduct(@ModelAttribute EditProductRequest request/*@RequestPart("file") MultipartFile file*/) throws IOException {
+        var product = productService.update(request/*file*/);
         var productResponse = modelMapper.map(product, AddProductResponse.class);
 
         return new ResponseEntity<>(productResponse, HttpStatus.OK);

@@ -10,6 +10,7 @@ import com.example.beshoes.models.response.LoginResponse;
 import com.example.beshoes.models.response.UserDto;
 import com.example.beshoes.repository.RoleRepository;
 import com.example.beshoes.repository.UserRepository;
+import com.example.beshoes.service.CustomUserDetailService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +32,8 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
+    @Autowired
+    private CustomUserDetailService userDetailsService;
     @Autowired
     private UserRepository userRepository;
 
@@ -98,6 +101,10 @@ public class AuthController {
                 .map(user -> modelMapper.map(user, UserDto.class))
                 .collect(Collectors.toList());
         return userDto;
+    }
+    @DeleteMapping("delete/{id}")
+    public boolean deleteUser(@PathVariable long id){
+        return userDetailsService.delete(id);
     }
 
 }

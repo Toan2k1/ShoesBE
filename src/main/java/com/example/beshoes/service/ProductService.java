@@ -14,7 +14,7 @@ public interface ProductService {
 
     Product add(AddProductRequest request, MultipartFile image) throws IOException;
 
-    Product update(EditProductRequest request, MultipartFile image) throws IOException;
+    Product update(EditProductRequest request/*, MultipartFile image*/) throws IOException;
 
     List<Product> getAll();
 

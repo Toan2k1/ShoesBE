@@ -7,5 +7,5 @@ public class AddOrderRequest {
 
     private String address , number, name;
 
-    private long quantityProduct;
+    private int quantityProduct;
 }

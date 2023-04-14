@@ -47,4 +47,7 @@ public class User {
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private List<Comment> comments = new ArrayList<>();
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user")
+    private List<FeedBack> feedbacks = new ArrayList<>();
 }

@@ -58,12 +58,13 @@ public class OrderServiceimpl implements OrderService {
     @Override
     public Order updateStatus(UpdateOrderRequest request) {
         var optinalOrder=orderRepository.findById(request.getId());
-        if(optinalOrder.isPresent()){
-            var editOrder=optinalOrder.get();
-            editOrder.setStatus(request.getStatus());
-            return orderRepository.save(editOrder);
+        for(var o : optinalOrder.get().getOrderdetails()){
+            var product = o.getProduct();
+                    product.setQuantity(o.getProduct().getQuantity()-o.getQuantity());
+                    productRepository.save(product);
         }
-        return null;
+        optinalOrder.get().setStatus(request.getStatus());
+     return orderRepository.save(optinalOrder.get());
     }
 
     @Override

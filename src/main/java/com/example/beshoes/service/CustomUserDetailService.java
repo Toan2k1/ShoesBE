@@ -41,7 +41,12 @@ public class CustomUserDetailService implements UserDetailsService {
     public MyUser getPrincipal() {
         return (MyUser) (SecurityContextHolder.getContext()).getAuthentication().getPrincipal();
     }
-
+    public boolean delete(long id) {
+        return userRepository.findById(id).map(product -> {
+            userRepository.delete(product);
+            return true;
+        }).orElse(false);
+    }
 
 
 }
